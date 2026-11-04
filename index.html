@@ -6,11 +6,31 @@
   <title>Sakura | Personal Site</title>
   <meta name="description" content="Sakura の個人サイト。日々の記録、学び、コード、好きなものを静かに残していく場所。" />
   <link rel="shortcut icon" href="imgs/shortcut-icon.ico" type="image/x-icon" />
+  <link rel="preload" href="fonts/kaisei-opti-regular.woff2" as="font" type="font/woff2" crossorigin />
   <style>
-    /* Font: MODI Kurobara Cinderella, https://modi.jpn.org/font_kurobara-cinderella.php */
+    /* Kaisei Opti: SIL Open Font License, see fonts/kaisei-opti-OFL.txt. */
     @font-face {
-      font-family: "Kurobara Cinderella";
-      src: url("fonts/kurobara-cinderella.ttf") format("truetype");
+      font-family: "Kaisei Opti";
+      src: url("fonts/kaisei-opti-regular.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Kaisei Opti";
+      src: url("fonts/kaisei-opti-bold.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+    }
+
+    /* Source Han Serif CN: SIL OFL, see fonts/source-han-serif-LICENSE.txt. */
+    @font-face {
+      font-family: "Source Han Serif CN";
+      src: url("fonts/source-han-serif-cn.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 250 900;
       font-display: swap;
     }
 
@@ -27,9 +47,9 @@
       --indigo: #304c61;
       --sun: #b9852f;
       --green: #39735d;
-      --display-font: "Kurobara Cinderella", "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif JP", serif;
-      --body-font: "Kurobara Cinderella", "Yu Gothic", "Hiragino Sans", "Meiryo", "Microsoft YaHei", sans-serif;
-      --zh-font: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Source Han Sans SC", Arial, sans-serif;
+      --display-font: "Kaisei Opti", "Yu Mincho", "Hiragino Mincho ProN", Georgia, serif;
+      --body-font: "Kaisei Opti", "Yu Mincho", "Hiragino Mincho ProN", Georgia, serif;
+      --zh-font: "Source Han Serif CN", "Noto Serif SC", "Songti SC", "SimSun", serif;
       --shadow: 0 12px 30px rgba(32, 35, 42, 0.1);
     }
 
@@ -46,22 +66,20 @@
       min-height: 100vh;
       color: var(--ink);
       font-family: var(--body-font);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.65;
+      letter-spacing: 0;
       background: var(--paper);
     }
 
-    html[lang="zh-CN"] body,
-    html[lang="zh-CN"] button,
-    html[lang="zh-CN"] input,
-    html[lang="zh-CN"] h1,
-    html[lang="zh-CN"] .kicker,
-    html[lang="zh-CN"] .lead,
-    html[lang="zh-CN"] .nav-links,
-    html[lang="zh-CN"] .profile-name,
-    html[lang="zh-CN"] .menu a,
-    html[lang="zh-CN"] .panel-title,
-    html[lang="zh-CN"] .site-info,
-    html[lang="zh-CN"] .article-title span {
-      font-family: var(--zh-font);
+    html[lang="zh-CN"] {
+      --display-font: var(--zh-font);
+      --body-font: var(--zh-font);
+    }
+
+    html[lang="zh-CN"] body {
+      line-height: 1.8;
     }
 
     html[lang="zh-CN"] .vertical-note {
@@ -77,7 +95,7 @@
     }
 
     html[lang="zh-CN"] .lead {
-      font-size: 21px;
+      font-size: 20px;
       line-height: 1.75;
     }
 
@@ -104,7 +122,7 @@
     html[lang="zh-CN"] .menu a,
     html[lang="zh-CN"] .panel-title,
     html[lang="zh-CN"] .site-info {
-      font-size: 18px;
+      font-size: 16px;
     }
 
     html[lang="zh-CN"] .notice,
@@ -274,17 +292,19 @@
     .nav-links {
       display: flex;
       justify-content: end;
-      gap: 10px;
+      gap: 18px;
       color: var(--soft-ink);
       font-family: var(--display-font);
-      font-size: 21px;
-      font-weight: 500;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.6;
     }
 
     .nav-links a {
       position: relative;
       padding: 10px 4px;
       border-radius: 0;
+      white-space: nowrap;
     }
 
     .nav-links a:hover {
@@ -368,8 +388,9 @@
       margin: 0 0 16px;
       color: var(--moss);
       font-family: var(--display-font);
-      font-size: 22px;
-      font-weight: 500;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.5;
     }
 
     .kicker::before {
@@ -385,18 +406,18 @@
     h1 {
       margin: 0;
       font-family: var(--display-font);
-      font-size: clamp(64px, 9.5vw, 118px);
-      line-height: 0.92;
+      font-size: 92px;
+      line-height: 1.15;
       letter-spacing: 0;
-      font-weight: 500;
+      font-weight: 400;
     }
 
     .lead {
       max-width: 610px;
-      margin: 24px 0 0;
+      margin: 20px 0 0;
       color: var(--soft-ink);
-      font-size: 24px;
-      line-height: 2;
+      font-size: 20px;
+      line-height: 1.7;
     }
 
     .vertical-note {
@@ -405,8 +426,8 @@
       writing-mode: vertical-rl;
       color: var(--muted);
       font-family: var(--display-font);
-      font-size: 22px;
-      line-height: 2;
+      font-size: 18px;
+      line-height: 1.6;
     }
 
     .board {
@@ -458,8 +479,9 @@
     .profile-name {
       margin: 0 0 10px;
       font-family: var(--display-font);
-      font-size: 32px;
-      font-weight: 500;
+      font-size: 30px;
+      font-weight: 400;
+      line-height: 1.3;
     }
 
     .tags {
@@ -472,8 +494,9 @@
       padding: 5px 10px;
       border-radius: 2px;
       color: #fff;
-      font-size: 14px;
-      font-weight: 500;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.5;
     }
 
     .tag.blue {
@@ -487,9 +510,9 @@
     .motto {
       padding: 20px 18px;
       color: var(--ink);
-      line-height: 2;
+      line-height: 1.75;
       border-bottom: 1px solid var(--line);
-      font-size: 20px;
+      font-size: 18px;
     }
 
     .motto p {
@@ -507,7 +530,7 @@
       gap: 12px;
       padding: 12px 16px;
       color: var(--soft-ink);
-      font-weight: 900;
+      font-weight: 700;
     }
 
     .github-line::before,
@@ -531,7 +554,7 @@
       color: #fff;
       text-align: center;
       font-size: 12px;
-      font-weight: 900;
+      font-weight: 700;
     }
 
     .stat strong {
@@ -569,8 +592,9 @@
       padding: 12px 0;
       color: var(--soft-ink);
       font-family: var(--display-font);
-      font-size: 21px;
-      font-weight: 500;
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 1.6;
     }
 
     .menu a:hover {
@@ -583,8 +607,9 @@
       gap: 12px;
       margin: 0 0 14px;
       font-family: var(--display-font);
-      font-size: 21px;
-      font-weight: 500;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.6;
     }
 
     .site-info {
@@ -592,8 +617,8 @@
       gap: 8px;
       color: var(--soft-ink);
       font-family: var(--display-font);
-      font-size: 21px;
-      line-height: 1.45;
+      font-size: 17px;
+      line-height: 1.6;
     }
 
     .site-info div {
@@ -603,71 +628,95 @@
     }
 
     .article-card {
-      min-height: 300px;
-      border: 1px solid var(--line);
-      border-radius: 0;
-      background: var(--panel);
-      box-shadow: none;
+      min-width: 0;
+      padding: 20px;
+      border: 1px solid rgba(32, 35, 42, 0.09);
+      border-radius: 8px;
+      background: var(--panel-strong);
+      box-shadow: 0 3px 14px rgba(32, 35, 42, 0.04);
       overflow: hidden;
     }
 
     .center-stack {
       display: grid;
+      min-width: 0;
       gap: 18px;
       align-content: start;
     }
 
-    .article-link {
+    .article-cover {
       position: relative;
-      min-height: 300px;
-      display: block;
+      display: grid;
+      align-items: end;
+      aspect-ratio: 2 / 1;
+      min-height: 260px;
+      max-height: 340px;
+      border-radius: 6px;
       color: #fff;
       overflow: hidden;
     }
 
-    .article-link--static {
-      cursor: default;
-    }
-
-    .article-link img {
+    .article-cover img {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.4s;
     }
 
-    .article-link:hover img {
-      transform: scale(1.06);
-    }
-
-    .article-link::after {
+    .article-cover::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, transparent 38%, rgba(0, 0, 0, 0.54));
+      background: linear-gradient(180deg, transparent 38%, rgba(0, 0, 0, 0.64));
     }
 
     .article-title {
-      position: absolute;
-      left: 24px;
-      right: 24px;
-      bottom: 24px;
+      position: relative;
       z-index: 1;
-    }
-
-    .article-title small {
-      display: block;
-      margin-bottom: 8px;
-      color: rgba(255, 255, 255, 0.78);
-      font-weight: 800;
-    }
-
-    .article-title span {
+      margin: 0;
+      padding: 24px;
       font-family: var(--display-font);
-      font-size: clamp(34px, 5vw, 58px);
-      font-weight: 500;
+      font-size: 42px;
+      font-weight: 400;
+      line-height: 1.3;
+      overflow-wrap: anywhere;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--line);
+      color: var(--soft-ink);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .article-type {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--moss);
+    }
+
+    .article-type::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      flex: 0 0 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .article-meta time {
+      margin-left: auto;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
     }
 
     .mini-game {
@@ -686,8 +735,9 @@
     .mini-game__title {
       margin: 0;
       font-family: var(--display-font);
-      font-size: 24px;
-      font-weight: 500;
+      font-size: 21px;
+      font-weight: 700;
+      line-height: 1.5;
     }
 
     .mini-game__score {
@@ -698,7 +748,8 @@
       border: 1px solid var(--line);
       color: var(--soft-ink);
       background: rgba(255, 255, 255, 0.62);
-      font-weight: 800;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
     }
 
     .mini-game__canvas {
@@ -722,7 +773,7 @@
     .mini-game__state {
       color: var(--soft-ink);
       font-size: 15px;
-      font-weight: 800;
+      font-weight: 700;
     }
 
     .mini-game__button {
@@ -733,7 +784,7 @@
       color: #fff;
       background: var(--ink);
       cursor: pointer;
-      font-weight: 800;
+      font-weight: 700;
     }
 
     .archive-pill {
@@ -747,13 +798,13 @@
       box-shadow: none;
       color: var(--soft-ink);
       font-size: 13px;
-      font-weight: 800;
+      font-weight: 400;
     }
 
     .notice {
       color: var(--soft-ink);
-      line-height: 1.8;
-      font-size: 17px;
+      line-height: 1.7;
+      font-size: 16px;
     }
 
     .music-card {
@@ -779,13 +830,16 @@
     .music-head strong {
       display: block;
       margin-bottom: 8px;
-      font-size: 18px;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.5;
     }
 
     .music-head span {
       color: var(--muted);
-      font-size: 15px;
-      font-weight: 700;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.6;
     }
 
     .music {
@@ -797,8 +851,8 @@
       margin: 0;
       padding: 0 14px 14px 34px;
       color: var(--soft-ink);
-      font-size: 16px;
-      line-height: 1.9;
+      font-size: 15px;
+      line-height: 1.7;
     }
 
     .backtop {
@@ -812,7 +866,7 @@
       color: var(--soft-ink);
       cursor: pointer;
       font-size: 13px;
-      font-weight: 800;
+      font-weight: 400;
     }
 
     .footer {
@@ -885,7 +939,8 @@
 
       .nav-links {
         flex-wrap: wrap;
-        font-size: 12px;
+        gap: 6px;
+        font-size: 15px;
       }
 
       .nav-links a {
@@ -910,7 +965,7 @@
       }
 
       .lead {
-        font-size: 20px;
+        font-size: 18px;
       }
 
       html[lang="zh-CN"] .lead {
@@ -921,8 +976,25 @@
         padding-top: 18px;
       }
 
-      .article-link {
-        min-height: 240px;
+      .article-card {
+        padding: 14px;
+      }
+
+      .article-cover {
+        aspect-ratio: 4 / 3;
+        min-height: 220px;
+        max-height: 300px;
+      }
+
+      .article-title {
+        padding: 18px;
+        font-size: 32px;
+      }
+
+      .article-meta {
+        margin-top: 14px;
+        padding-top: 12px;
+        font-size: 12px;
       }
 
       .profile-cover {
@@ -1033,15 +1105,16 @@
       </aside>
 
       <section class="center-stack" aria-label="Main content">
-        <section class="article-card" id="latest">
-          <div class="article-link article-link--static">
+        <article class="article-card" id="latest" aria-labelledby="latest-title">
+          <div class="article-cover">
             <img src="imgs/default-cover.webp" alt="Hello World" />
-            <span class="article-title">
-              <small>2025.11.04</small>
-              <span>Hello World</span>
-            </span>
+            <h2 class="article-title" id="latest-title">Hello World</h2>
           </div>
-        </section>
+          <footer class="article-meta">
+            <span class="article-type" data-ja="日記" data-zh="日志">日記</span>
+            <time datetime="2025-11-04">2025年11月04日</time>
+          </footer>
+        </article>
 
         <section class="panel mini-game" aria-label="Fleepy Flight">
           <div class="mini-game__head">
