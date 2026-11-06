@@ -1,0 +1,15 @@
+<% const link = sakura_card_link(post); %>
+<article class="article-card" <%- first ? 'id="latest"' : '' %>>
+  <% if (link) { %><a class="article-cover" href="<%- link %>"><% } else { %><div class="article-cover"><% } %>
+    <img src="<%= sakura_cover(post) %>" alt="" loading="lazy">
+    <h2 class="article-title"><%= post.title %></h2>
+  <% if (link) { %></a><% } else { %></div><% } %>
+  <footer class="article-meta">
+    <div class="article-categories">
+      <% if (post.categories.length) { post.categories.each(function(category) { %>
+        <a class="article-type" href="<%- url_for(category.path) %>"><%= category.name %></a>
+      <% }); } else { %><span class="article-type" data-ja="日記" data-zh="日志">日記</span><% } %>
+    </div>
+    <time datetime="<%= date(post.date, 'YYYY-MM-DD') %>"><%= date(post.date, 'YYYY年MM月DD日') %></time>
+  </footer>
+</article>

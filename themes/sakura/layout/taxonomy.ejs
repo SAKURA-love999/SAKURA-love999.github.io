@@ -1,0 +1,8 @@
+<section class="archive-list">
+  <h1 class="section-heading" data-ja="<%= page.kind === 'categories' ? '分類' : 'タグ' %>" data-zh="<%= page.kind === 'categories' ? '分类' : '标签' %>"><%= page.title %></h1>
+  <% const entries = page.kind === 'categories' ? site.categories : site.tags; %>
+  <% entries.sort('name').each(function(entry) { %>
+    <a class="taxonomy-entry" href="<%- url_for(entry.path) %>"><span><%= entry.name %></span><span><%= entry.posts.length %></span></a>
+  <% }); %>
+  <% if (!entries.length) { %><p class="empty-state" data-ja="まだありません。" data-zh="暂无内容。">まだありません。</p><% } %>
+</section>

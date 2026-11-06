@@ -1,17 +1,7 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sakura | Personal Site</title>
-  <meta name="description" content="Sakura の個人サイト。日々の記録、学び、コード、好きなものを静かに残していく場所。" />
-  <link rel="shortcut icon" href="imgs/shortcut-icon.ico" type="image/x-icon" />
-  <link rel="preload" href="fonts/kaisei-opti-regular.woff2" as="font" type="font/woff2" crossorigin />
-  <style>
-    /* Kaisei Opti: SIL Open Font License, see fonts/kaisei-opti-OFL.txt. */
+/* Kaisei Opti: SIL Open Font License, see fonts/kaisei-opti-OFL.txt. */
     @font-face {
       font-family: "Kaisei Opti";
-      src: url("fonts/kaisei-opti-regular.woff2") format("woff2");
+      src: url("../fonts/kaisei-opti-regular.woff2") format("woff2");
       font-style: normal;
       font-weight: 400;
       font-display: swap;
@@ -19,7 +9,7 @@
 
     @font-face {
       font-family: "Kaisei Opti";
-      src: url("fonts/kaisei-opti-bold.woff2") format("woff2");
+      src: url("../fonts/kaisei-opti-bold.woff2") format("woff2");
       font-style: normal;
       font-weight: 700;
       font-display: swap;
@@ -28,7 +18,7 @@
     /* Source Han Serif CN: SIL OFL, see fonts/source-han-serif-LICENSE.txt. */
     @font-face {
       font-family: "Source Han Serif CN";
-      src: url("fonts/source-han-serif-cn.woff2") format("woff2");
+      src: url("../fonts/source-han-serif-cn.woff2") format("woff2");
       font-style: normal;
       font-weight: 250 900;
       font-display: swap;
@@ -135,7 +125,7 @@
       position: fixed;
       inset: 0;
       z-index: -2;
-      background: url("imgs/bg-cover.jpeg") center / cover fixed;
+      background: url("../imgs/bg-cover.jpeg") center / cover fixed;
     }
 
     body::after {
@@ -380,7 +370,7 @@
       border-radius: 0;
       background:
         linear-gradient(90deg, rgba(251, 250, 247, 0.36), rgba(251, 250, 247, 0.08)),
-        url("imgs/top-cover.jpeg") center / cover;
+        url("../imgs/top-cover.jpeg") center / cover;
       box-shadow: none;
     }
 
@@ -464,7 +454,7 @@
       padding: 22px 18px;
       background:
         linear-gradient(90deg, rgba(251, 250, 247, 0.12), rgba(251, 250, 247, 0.18)),
-        url("imgs/avatar-bg.jpeg") center / cover;
+        url("../imgs/avatar-bg.jpeg") center / cover;
     }
 
     .avatar {
@@ -1013,410 +1003,3 @@
         font-size: 30px;
       }
     }
-  </style>
-</head>
-<body>
-  <header class="site-header">
-    <nav class="nav" aria-label="Main navigation">
-      <form class="search" id="search-form">
-        <input id="search-input" type="search" data-placeholder-ja="記事タイトルを検索" data-placeholder-zh="请输入要搜索的文章标题" placeholder="記事タイトルを検索" />
-        <button type="submit" aria-label="Search">⌕</button>
-        <div class="search-results" id="search-results">
-          <div class="search-results__head">
-            <span data-ja="検索結果" data-zh="搜索结果">検索結果</span>
-            <button type="button" id="close-search" data-ja="閉じる" data-zh="关闭">閉じる</button>
-          </div>
-          <ul id="search-list"></ul>
-        </div>
-      </form>
-
-      <div class="nav-links">
-        <a href="#top" data-ja="ホーム" data-zh="首页">ホーム</a>
-        <a href="/log" data-ja="日記" data-zh="日志">日記</a>
-        <a href="/link" data-ja="友達" data-zh="友情链接">友達</a>
-        <a href="/about" data-ja="自己紹介" data-zh="关于我">自己紹介</a>
-      </div>
-
-      <div class="lang-switch" aria-label="Language">
-        <button type="button" class="is-active" data-lang-btn="ja">日本語</button>
-        <button type="button" data-lang-btn="zh">简体中文</button>
-      </div>
-    </nav>
-  </header>
-
-  <main class="page" id="top">
-    <section class="hero">
-      <div>
-        <p class="kicker">MOMENTS</p>
-        <h1>Sakura</h1>
-        <p class="lead" data-ja="僕の地獄へようこそ～" data-zh="欢迎来到我的Qzone(●'◡'●)">
-          僕の地獄へようこそ～
-        </p>
-      </div>
-      <p class="vertical-note" data-ja="空がきれいだなー。" data-zh="">空がきれいだなー。</p>
-    </section>
-
-    <section class="board" aria-label="Home board">
-      <aside class="stack">
-        <section class="panel">
-          <div class="profile-cover">
-            <img class="avatar" src="imgs/avatar.jpg" alt="Sakura" />
-            <div>
-              <p class="profile-name" data-ja="さくら" data-zh="樱">さくら</p>
-              <div class="tags">
-                <span class="tag blue">世界一！</span>
-                <span class="tag purple">power</span>
-              </div>
-            </div>
-          </div>
-          <div class="motto">
-            <p>地球終わった</p>
-            <p>不可抗力で</p>
-          </div>
-          <a class="github-line" href="https://github.com/SAKURA-love999" target="_blank" rel="noopener">GitHub</a>
-          <div class="stats">
-            <a class="stat" href="/categories"><strong>0</strong><span data-ja="分類" data-zh="分类">分類</span></a>
-            <a class="stat" href="/tags"><strong>0</strong><span data-ja="タグ" data-zh="标签">タグ</span></a>
-            <a class="stat" href="/archives"><strong>1</strong><span data-ja="記事" data-zh="归档">記事</span></a>
-          </div>
-        </section>
-
-        <section class="panel">
-          <ul class="menu">
-            <li><a href="/"><span data-ja="ホーム" data-zh="首页">ホーム</span><span>home</span></a></li>
-            <li><a href="/log"><span data-ja="日記" data-zh="日志">日記</span><span>log</span></a></li>
-            <li><a href="/link"><span data-ja="友達" data-zh="友情链接">友達</span><span>link</span></a></li>
-            <li><a href="/about"><span data-ja="自己紹介" data-zh="关于自己">自己紹介</span><span>about</span></a></li>
-            <li><a href="/tools"><span data-ja="道具" data-zh="我的工具">道具</span><span>tools</span></a></li>
-          </ul>
-        </section>
-
-        <section class="panel">
-          <div class="panel-body">
-            <h2 class="panel-title"><span data-ja="サイト情報" data-zh="站点信息">サイト情報</span><span>info</span></h2>
-            <div class="site-info">
-              <div><span data-ja="記事数" data-zh="文章数目">記事数</span><span data-ja="1 篇" data-zh="1 篇">1 篇</span></div>
-              <div><span data-ja="最近更新" data-zh="最近动态">最近更新</span><span>2025.11</span></div>
-              <div><span data-ja="公開日数" data-zh="上线时间">公開日数</span><span data-ja="35 日" data-zh="35 天">35 日</span></div>
-              <div><span data-ja="現在版本" data-zh="当前版本">現在版本</span><span>v1.0.2</span></div>
-            </div>
-          </div>
-        </section>
-      </aside>
-
-      <section class="center-stack" aria-label="Main content">
-        <article class="article-card" id="latest" aria-labelledby="latest-title">
-          <div class="article-cover">
-            <img src="imgs/default-cover.webp" alt="Hello World" />
-            <h2 class="article-title" id="latest-title">Hello World</h2>
-          </div>
-          <footer class="article-meta">
-            <span class="article-type" data-ja="日記" data-zh="日志">日記</span>
-            <time datetime="2025-11-04">2025年11月04日</time>
-          </footer>
-        </article>
-
-        <section class="panel mini-game" aria-label="Fleepy Flight">
-          <div class="mini-game__head">
-            <h2 class="mini-game__title" data-ja="遊んでみてね" data-zh="一起来玩吧！">遊んでみてね</h2>
-            <span class="mini-game__score" id="fleepy-score">0</span>
-          </div>
-          <canvas class="mini-game__canvas" id="fleepy-game" width="720" height="270"></canvas>
-          <div class="mini-game__bar">
-            <span class="mini-game__state" id="fleepy-state" data-ja="READY" data-zh="READY">READY</span>
-            <button class="mini-game__button" type="button" id="fleepy-start" data-ja="START" data-zh="START">START</button>
-          </div>
-        </section>
-      </section>
-
-      <aside class="stack">
-        <a class="archive-pill" href="/archives/2025/11/">
-          <span data-ja="2025年11月" data-zh="2025年11月">2025年11月</span>
-          <span>1</span>
-        </a>
-
-        <section class="panel">
-          <div class="panel-body">
-            <h2 class="panel-title"><span data-ja="お知らせ" data-zh="公告栏">お知らせ</span><span>note</span></h2>
-            <div class="notice">♡ 山田激推し ♡</div>
-          </div>
-        </section>
-
-        <section class="panel music-card">
-          <div class="music-head">
-            <img src="imgs/music-cover-disc.png" alt="Music cover" />
-            <div>
-              <strong>来世で会おう</strong>
-              <span>さユり</span>
-            </div>
-          </div>
-          <audio class="music" controls preload="none">
-            <source src="music/kabuda.mp3" type="audio/mpeg" />
-          </audio>
-          <ol class="playlist">
-            <li>清く 正しく カブタック</li>
-            <li>来世で会おう</li>
-          </ol>
-        </section>
-
-        <button class="backtop" type="button" id="backtop" data-ja="上へ戻る" data-zh="回到顶部">上へ戻る</button>
-      </aside>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <span data-ja="© 2026 Sakura. GitHub Pages で公開しています。" data-zh="© 2026 Sakura. 使用 GitHub Pages 发布。">© 2026 Sakura. GitHub Pages で公開しています。</span>
-  </footer>
-
-  <script>
-    const posts = [
-      { title: "Hello World", path: "/2025/11/04/hello-world/", cover: "imgs/default-cover.webp" }
-    ];
-    const langButtons = document.querySelectorAll("[data-lang-btn]");
-    const translatable = document.querySelectorAll("[data-ja][data-zh]");
-    const searchForm = document.querySelector("#search-form");
-    const searchInput = document.querySelector("#search-input");
-    const searchResults = document.querySelector("#search-results");
-    const searchList = document.querySelector("#search-list");
-    const closeSearch = document.querySelector("#close-search");
-    const siteHeader = document.querySelector(".site-header");
-    let currentLang = "ja";
-    let lastScrollY = window.scrollY;
-    let revealAnchorY = window.scrollY;
-
-    function setLanguage(lang) {
-      currentLang = lang;
-      document.documentElement.lang = lang === "zh" ? "zh-CN" : "ja";
-      langButtons.forEach((button) => {
-        button.classList.toggle("is-active", button.dataset.langBtn === lang);
-      });
-      translatable.forEach((node) => {
-        node.textContent = node.dataset[lang];
-      });
-      if (searchInput) {
-        searchInput.placeholder = searchInput.dataset[`placeholder${lang === "ja" ? "Ja" : "Zh"}`];
-      }
-    }
-
-    function renderSearch() {
-      const keyword = searchInput.value.trim().toLowerCase();
-      if (!keyword) return;
-      const result = posts.filter((post) => post.title.toLowerCase().includes(keyword));
-      searchList.innerHTML = result.length
-        ? result.map((post) => `
-          <li>
-            <a href="${post.path}">
-              <img src="${post.cover}" alt="${post.title}" />
-              <span>${post.title}</span>
-            </a>
-          </li>
-        `).join("")
-        : `<li>${currentLang === "ja" ? "記事が見つかりません" : "没有搜索到内容"}</li>`;
-      searchResults.classList.add("is-open");
-    }
-
-    langButtons.forEach((button) => {
-      button.addEventListener("click", () => setLanguage(button.dataset.langBtn));
-    });
-
-    searchForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      renderSearch();
-    });
-
-    closeSearch.addEventListener("click", () => {
-      searchResults.classList.remove("is-open");
-    });
-
-    document.querySelector("#backtop").addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-
-    const gameCanvas = document.querySelector("#fleepy-game");
-    const gameScore = document.querySelector("#fleepy-score");
-    const gameStateText = document.querySelector("#fleepy-state");
-    const gameButton = document.querySelector("#fleepy-start");
-    const gameContext = gameCanvas.getContext("2d");
-    const game = {
-      running: false,
-      over: false,
-      score: 0,
-      lastFrame: 0,
-      player: { x: 136, y: 134, velocity: 0, radius: 15 },
-      pipes: []
-    };
-
-    function newPipe(x) {
-      return {
-        x,
-        gapY: 62 + Math.random() * 92,
-        passed: false
-      };
-    }
-
-    function resetGame() {
-      game.running = false;
-      game.over = false;
-      game.score = 0;
-      game.player.y = 134;
-      game.player.velocity = 0;
-      game.pipes = [newPipe(760)];
-      gameScore.textContent = "0";
-      gameStateText.textContent = "READY";
-      gameButton.textContent = "START";
-      drawGame();
-    }
-
-    function drawGame() {
-      const width = gameCanvas.width;
-      const height = gameCanvas.height;
-      const groundY = height - 28;
-
-      gameContext.clearRect(0, 0, width, height);
-      gameContext.fillStyle = "#dcecf2";
-      gameContext.fillRect(0, 0, width, height);
-
-      gameContext.fillStyle = "rgba(255, 255, 255, 0.72)";
-      gameContext.beginPath();
-      gameContext.arc(94, 62, 24, 0, Math.PI * 2);
-      gameContext.arc(122, 58, 32, 0, Math.PI * 2);
-      gameContext.arc(158, 64, 22, 0, Math.PI * 2);
-      gameContext.fill();
-
-      gameContext.fillStyle = "#526b5a";
-      game.pipes.forEach((pipe) => {
-        const gap = 106;
-        const pipeWidth = 58;
-        gameContext.fillRect(pipe.x, 0, pipeWidth, pipe.gapY);
-        gameContext.fillRect(pipe.x, pipe.gapY + gap, pipeWidth, groundY - pipe.gapY - gap);
-        gameContext.fillStyle = "#3f5e50";
-        gameContext.fillRect(pipe.x - 5, pipe.gapY - 10, pipeWidth + 10, 10);
-        gameContext.fillRect(pipe.x - 5, pipe.gapY + gap, pipeWidth + 10, 10);
-        gameContext.fillStyle = "#526b5a";
-      });
-
-      gameContext.fillStyle = "#e8d8b8";
-      gameContext.fillRect(0, groundY, width, height - groundY);
-      gameContext.fillStyle = "rgba(82, 107, 90, 0.24)";
-      for (let x = 0; x < width; x += 28) {
-        gameContext.fillRect(x, groundY + 7, 16, 2);
-      }
-
-      const bird = game.player;
-      gameContext.save();
-      gameContext.translate(bird.x, bird.y);
-      gameContext.rotate(Math.max(-0.45, Math.min(0.55, bird.velocity / 14)));
-      gameContext.fillStyle = "#b84f64";
-      gameContext.beginPath();
-      gameContext.arc(0, 0, bird.radius, 0, Math.PI * 2);
-      gameContext.fill();
-      gameContext.fillStyle = "#f4c4d1";
-      gameContext.beginPath();
-      gameContext.ellipse(-7, 3, 8, 5, -0.4, 0, Math.PI * 2);
-      gameContext.fill();
-      gameContext.fillStyle = "#20232a";
-      gameContext.beginPath();
-      gameContext.arc(5, -5, 2.4, 0, Math.PI * 2);
-      gameContext.fill();
-      gameContext.restore();
-    }
-
-    function endGame() {
-      game.running = false;
-      game.over = true;
-      gameStateText.textContent = "GAME OVER";
-      gameButton.textContent = "RETRY";
-      drawGame();
-    }
-
-    function updateGame(delta) {
-      const width = gameCanvas.width;
-      const height = gameCanvas.height;
-      const groundY = height - 28;
-      const bird = game.player;
-      const pipeWidth = 58;
-      const gap = 106;
-
-      bird.velocity += 0.36 * delta;
-      bird.y += bird.velocity * delta;
-
-      game.pipes.forEach((pipe) => {
-        pipe.x -= 2.25 * delta;
-        if (!pipe.passed && pipe.x + pipeWidth < bird.x) {
-          pipe.passed = true;
-          game.score += 1;
-          gameScore.textContent = String(game.score);
-        }
-      });
-
-      if (game.pipes[game.pipes.length - 1].x < width - 230) {
-        game.pipes.push(newPipe(width + 40));
-      }
-      if (game.pipes[0].x < -90) {
-        game.pipes.shift();
-      }
-
-      const hitPipe = game.pipes.some((pipe) => (
-        bird.x + bird.radius > pipe.x &&
-        bird.x - bird.radius < pipe.x + pipeWidth &&
-        (bird.y - bird.radius < pipe.gapY || bird.y + bird.radius > pipe.gapY + gap)
-      ));
-
-      if (bird.y - bird.radius < 0 || bird.y + bird.radius > groundY || hitPipe) {
-        endGame();
-      }
-    }
-
-    function tickGame(timestamp) {
-      if (!game.running) return;
-      const delta = Math.min(2.1, (timestamp - game.lastFrame) / 16.67 || 1);
-      game.lastFrame = timestamp;
-      updateGame(delta);
-      drawGame();
-      if (game.running) requestAnimationFrame(tickGame);
-    }
-
-    function flapGame() {
-      if (game.over) resetGame();
-      if (!game.running) {
-        game.running = true;
-        gameStateText.textContent = "PLAY";
-        gameButton.textContent = "FLAP";
-        game.lastFrame = performance.now();
-        requestAnimationFrame(tickGame);
-      }
-      game.player.velocity = -6.6;
-    }
-
-    gameButton.addEventListener("click", flapGame);
-    gameCanvas.addEventListener("pointerdown", flapGame);
-    window.addEventListener("keydown", (event) => {
-      if (event.code === "Space" && document.activeElement !== searchInput) {
-        event.preventDefault();
-        flapGame();
-      }
-    });
-    resetGame();
-
-    window.addEventListener("scroll", () => {
-      const currentY = window.scrollY;
-      const diff = currentY - lastScrollY;
-
-      siteHeader.classList.toggle("is-scrolled", currentY > 8);
-
-      if (currentY < 24) {
-        siteHeader.classList.remove("is-hidden");
-        revealAnchorY = currentY;
-      } else if (diff > 4) {
-        siteHeader.classList.add("is-hidden");
-        revealAnchorY = currentY;
-      } else if (diff < -4 && revealAnchorY - currentY > 18) {
-        siteHeader.classList.remove("is-hidden");
-        revealAnchorY = currentY;
-      }
-
-      lastScrollY = currentY;
-    }, { passive: true });
-  </script>
-</body>
-</html>

@@ -1,0 +1,29 @@
+<aside class="stack">
+<%- partial("partial/months") %>
+
+        <section class="panel">
+          <div class="panel-body">
+            <h2 class="panel-title"><span data-ja="お知らせ" data-zh="公告栏">お知らせ</span><span>note</span></h2>
+            <div class="notice">♡ 山田激推し ♡</div>
+          </div>
+        </section>
+
+        <section class="panel music-card">
+          <div class="music-head">
+            <img src="<%- url_for("/imgs/music-cover-disc.png") %>" alt="Music cover">
+            <div>
+              <strong>来世で会おう</strong>
+              <span>さユり</span>
+            </div>
+          </div>
+          <audio class="music" controls="" preload="none">
+            <source src="<%- url_for("/music/kabuda.mp3") %>" type="audio/mpeg">
+          </audio>
+          <ol class="playlist">
+            <li>清く 正しく カブタック</li>
+            <li>来世で会おう</li>
+          </ol>
+        </section>
+
+        <button class="backtop" type="button" id="backtop" data-ja="上へ戻る" data-zh="回到顶部">上へ戻る</button>
+      </aside>

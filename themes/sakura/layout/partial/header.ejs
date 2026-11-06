@@ -1,0 +1,27 @@
+<header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <form class="search" id="search-form">
+        <input id="search-input" type="search" aria-label="Search articles" autocomplete="off" data-placeholder-ja="記事タイトルを検索" data-placeholder-zh="请输入要搜索的文章标题" placeholder="記事タイトルを検索">
+        <button type="submit" aria-label="Search">⌕</button>
+        <div class="search-results" id="search-results">
+          <div class="search-results__head">
+            <span data-ja="検索結果" data-zh="搜索结果">検索結果</span>
+            <button type="button" id="close-search" data-ja="閉じる" data-zh="关闭">閉じる</button>
+          </div>
+          <ul id="search-list"></ul>
+        </div>
+      </form>
+
+      <div class="nav-links">
+        <a href="<%- url_for('/') %>" data-ja="ホーム" data-zh="首页">ホーム</a>
+        <a href="<%- url_for("/log") %>" data-ja="日記" data-zh="日志">日記</a>
+        <a href="<%- url_for("/link") %>" data-ja="友達" data-zh="友情链接">友達</a>
+        <a href="<%- url_for("/about") %>" data-ja="自己紹介" data-zh="关于我">自己紹介</a>
+      </div>
+
+      <div class="lang-switch" aria-label="Language">
+        <button type="button" class="is-active" data-lang-btn="ja">日本語</button>
+        <button type="button" data-lang-btn="zh">简体中文</button>
+      </div>
+    </nav>
+  </header>

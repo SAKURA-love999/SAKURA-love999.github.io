@@ -1,0 +1,5 @@
+<% sakura_months().forEach(function(month) { %>
+<a class="archive-pill" href="<%- url_for(month.path) %>">
+  <span><%= month.label %></span><span><%= month.count %></span>
+</a>
+<% }); %>

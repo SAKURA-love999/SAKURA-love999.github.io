@@ -1,0 +1,7 @@
+<% if (page.total > 1) { %>
+<nav class="pagination" aria-label="Pagination">
+  <% if (page.prev) { %><a rel="prev" href="<%- url_for(page.prev_link) %>" data-ja="← 新しい日記" data-zh="← 较新的日志">← 新しい日記</a><% } else { %><span></span><% } %>
+  <span><%= page.current %> / <%= page.total %></span>
+  <% if (page.next) { %><a rel="next" href="<%- url_for(page.next_link) %>" data-ja="前の日記 →" data-zh="较早的日志 →">前の日記 →</a><% } else { %><span></span><% } %>
+</nav>
+<% } %>

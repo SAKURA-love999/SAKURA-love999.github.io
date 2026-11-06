@@ -1,0 +1,30 @@
+{
+  "name": "sakura-hexo-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sakura's Hexo source and theme",
+  "engines": { "node": ">=20.19.0" },
+  "scripts": {
+    "new": "hexo new",
+    "server": "hexo server --ip 127.0.0.1 --port 4173",
+    "clean": "hexo clean",
+    "build": "hexo generate",
+    "check": "npm run build && node --test --test-concurrency=1 test/site.test.cjs",
+    "test": "npm run check && node --test test/deploy.test.cjs",
+    "deploy": "npm run check && hexo deploy"
+  },
+  "hexo": { "version": "8.1.1" },
+  "dependencies": {
+    "hexo": "8.1.1",
+    "hexo-cli": "4.3.2",
+    "hexo-generator-archive": "2.0.0",
+    "hexo-generator-category": "2.0.0",
+    "hexo-generator-index": "4.0.0",
+    "hexo-generator-tag": "2.0.0",
+    "hexo-pagination": "4.0.0",
+    "hexo-renderer-ejs": "2.0.0",
+    "hexo-renderer-marked": "7.0.1",
+    "hexo-server": "3.0.0"
+  },
+  "devDependencies": { "cheerio": "1.2.0" }
+}

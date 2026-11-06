@@ -1,0 +1,14 @@
+<section class="archive-list">
+  <h1 class="section-heading">
+    <% if (page.category || page.tag) { %><%= page.category || '#' + page.tag %>
+    <% } else if (page.year) { %><%= page.year %><%= page.month ? ' / ' + page.month : '' %>
+    <% } else { %><span data-ja="アーカイブ" data-zh="归档">アーカイブ</span><% } %>
+  </h1>
+  <% page.posts.each(function(post) { %>
+  <a class="archive-entry" href="<%- url_for(post.path) %>">
+    <time datetime="<%= date(post.date, 'YYYY-MM-DD') %>"><%= date(post.date, 'YYYY.MM.DD') %></time>
+    <span><%= post.title %></span>
+  </a>
+  <% }); %>
+  <%- partial('partial/pagination') %>
+</section>

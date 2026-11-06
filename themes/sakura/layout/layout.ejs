@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= page.title ? page.title + ' | ' : '' %><%= config.title %></title>
+  <meta name="description" content="<%= config.description %>">
+  <meta name="generator" content="Hexo">
+  <link rel="icon" href="<%- url_for('/imgs/shortcut-icon.ico') %>">
+  <link rel="preload" href="<%- url_for('/fonts/kaisei-opti-regular.woff2') %>" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="<%- url_for('/css/site.css') %>">
+  <link rel="stylesheet" href="<%- url_for('/css/content.css') %>">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <%- partial('partial/header') %>
+  <main class="page" id="top">
+    <% if (page.__index && !page.diary && page.current === 1) { %>
+      <%- partial('partial/hero') %>
+    <% } %>
+    <div class="board">
+      <%- partial('partial/left') %>
+      <section class="center-stack" id="main-content" aria-label="Main content">
+        <%- body %>
+      </section>
+      <%- partial('partial/right') %>
+    </div>
+  </main>
+  <footer class="footer">
+    <span>© <%= new Date().getFullYear() %> Sakura · Hexo</span>
+  </footer>
+  <script id="site-data" type="application/json"><%- sakura_json(sakura_posts().map(post => ({ title: post.title, path: url_for(post.path), cover: sakura_cover(post) }))) %></script>
+  <script src="<%- url_for('/js/site.js') %>" defer></script>
+  <% if (page.__index && !page.next) { %><script src="<%- url_for('/js/game.js') %>" defer></script><% } %>
+</body>
+</html>

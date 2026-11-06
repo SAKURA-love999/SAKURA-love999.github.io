@@ -1,0 +1,46 @@
+<aside class="stack">
+        <section class="panel">
+          <div class="profile-cover">
+            <img class="avatar" src="<%- url_for("/imgs/avatar.jpg") %>" alt="Sakura">
+            <div>
+              <p class="profile-name" data-ja="さくら" data-zh="樱">さくら</p>
+              <div class="tags">
+                <span class="tag blue">世界一！</span>
+                <span class="tag purple">power</span>
+              </div>
+            </div>
+          </div>
+          <div class="motto">
+            <p>地球終わった</p>
+            <p>不可抗力で</p>
+          </div>
+          <a class="github-line" href="https://github.com/SAKURA-love999" target="_blank" rel="noopener">GitHub</a>
+          <div class="stats">
+            <a class="stat" href="<%- url_for("/categories") %>"><strong><%= site.categories.length %></strong><span data-ja="分類" data-zh="分类">分類</span></a>
+            <a class="stat" href="<%- url_for("/tags") %>"><strong><%= site.tags.length %></strong><span data-ja="タグ" data-zh="标签">タグ</span></a>
+            <a class="stat" href="<%- url_for("/archives") %>"><strong><%= site.posts.length %></strong><span data-ja="記事" data-zh="归档">記事</span></a>
+          </div>
+        </section>
+
+        <section class="panel">
+          <ul class="menu">
+            <li><a href="<%- url_for("/") %>"><span data-ja="ホーム" data-zh="首页">ホーム</span><span>home</span></a></li>
+            <li><a href="<%- url_for("/log") %>"><span data-ja="日記" data-zh="日志">日記</span><span>log</span></a></li>
+            <li><a href="<%- url_for("/link") %>"><span data-ja="友達" data-zh="友情链接">友達</span><span>link</span></a></li>
+            <li><a href="<%- url_for("/about") %>"><span data-ja="自己紹介" data-zh="关于自己">自己紹介</span><span>about</span></a></li>
+            <li><a href="<%- url_for("/tools") %>"><span data-ja="道具" data-zh="我的工具">道具</span><span>tools</span></a></li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <div class="panel-body">
+            <h2 class="panel-title"><span data-ja="サイト情報" data-zh="站点信息">サイト情報</span><span>info</span></h2>
+            <div class="site-info">
+              <div><span data-ja="記事数" data-zh="文章数目">記事数</span><span data-ja="<%= site.posts.length %> 篇" data-zh="<%= site.posts.length %> 篇"><%= site.posts.length %> 篇</span></div>
+              <div><span data-ja="最近更新" data-zh="最近动态">最近更新</span><span><%= sakura_latest_month() %></span></div>
+              <div><span data-ja="公開日数" data-zh="上线时间">公開日数</span><span data-ja="<%= sakura_open_days() %> 日" data-zh="<%= sakura_open_days() %> 天" data-start-date="2025-11-04"><%= sakura_open_days() %> 日</span></div>
+              <div><span data-ja="現在版本" data-zh="当前版本">現在版本</span><span>v1.0.2</span></div>
+            </div>
+          </div>
+        </section>
+      </aside>

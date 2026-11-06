@@ -1,0 +1,9 @@
+<% if (page.diary) { %>
+  <h1 class="section-heading" data-ja="日記" data-zh="日志">日記</h1>
+<% } %>
+<% page.posts.each(function(post, index) { %>
+  <%- partial('partial/post-card', { post, first: index === 0 }) %>
+<% }); %>
+<% if (!page.posts.length) { %><p class="empty-state" data-ja="まだ日記はありません。" data-zh="还没有日志。">まだ日記はありません。</p><% } %>
+<%- partial('partial/pagination') %>
+<% if (!page.next) { %><%- partial('partial/game') %><% } %>
