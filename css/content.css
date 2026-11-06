@@ -1,0 +1,71 @@
+:root { --header-height: 82px; }
+.page { padding-top: var(--header-height); }
+.search { overflow: visible; }
+.search-results { max-height: 65vh; overflow-y: auto; }
+.search-result { display: grid; grid-template-columns: 58px 1fr; gap: 12px; align-items: center; }
+.search-result span { overflow-wrap: anywhere; }
+.search-results li { min-width: 0; }
+#main-content, #latest, .post-content [id] { scroll-margin-top: calc(var(--header-height) + 20px); }
+.center-stack { min-width: 0; }
+.article-title { overflow-wrap: anywhere; }
+.article-meta { gap: 12px; flex-wrap: wrap; }
+.article-categories { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+.article-meta time { margin-left: auto; }
+.article-meta a:hover, .post-content a:hover, .return-link:hover { color: var(--sakura); }
+.section-heading, .post-heading { margin: 0; font-size: 30px; line-height: 1.5; overflow-wrap: anywhere; }
+.post-sheet { background: rgba(255, 255, 255, .88); border-block: 1px solid var(--line); }
+.post-header { padding: 24px; }
+.post-date { margin: 0 0 12px; font-size: 13px; color: var(--muted); }
+.post-taxonomies { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 16px; font-size: 14px; color: var(--moss); }
+.post-cover { width: 100%; aspect-ratio: 2 / 1; object-fit: cover; }
+.post-content { padding: 4px 24px 28px; font-size: 17px; line-height: 1.95; overflow-wrap: anywhere; }
+.post-content:lang(zh-CN) { font-family: var(--zh-font); }
+.post-content:lang(ja) { font-family: "Kaisei Opti", "Yu Mincho", serif; }
+.post-content h2 { margin: 1.6em 0 .6em; font-size: 25px; line-height: 1.55; }
+.post-content h3 { margin: 1.4em 0 .5em; font-size: 21px; line-height: 1.6; }
+.post-content h4 { font-size: 18px; }
+.post-content a { text-decoration: underline; text-underline-offset: 4px; }
+.post-content img { height: auto; margin: 24px auto; }
+.post-content blockquote { margin-inline: 0; padding: 4px 20px; border-left: 3px solid var(--sakura); color: var(--soft-ink); }
+.post-content pre, .post-content .highlight { max-width: 100%; margin: 20px 0; padding: 16px; overflow-x: auto; background: #f0f2f1; font-size: 14px; line-height: 1.7; }
+.post-content code { font-family: Consolas, monospace; font-size: .88em; }
+.post-content .highlight pre { margin: 0; padding: 0; }
+.post-content .highlight table { margin: 0; }
+.post-content .highlight td { padding: 0; border: 0; }
+.post-content table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; }
+.post-content th, .post-content td { padding: 8px 12px; border: 1px solid var(--line); }
+.post-content hr { margin: 28px 0; border: 0; border-top: 1px solid var(--line); }
+.post-neighbors { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; font-size: 14px; }
+.post-neighbors a { max-width: 100%; overflow-wrap: anywhere; }
+.return-link { font-size: 14px; text-decoration: underline; }
+.pagination { display: flex; align-items: center; justify-content: space-between; gap: 14px; font-size: 14px; }
+.pagination a { padding: 10px 0; }
+.archive-list { padding: 24px; background: rgba(255,255,255,.85); border-block: 1px solid var(--line); }
+.archive-list .section-heading { margin-bottom: 24px; }
+.archive-entry { display: grid; grid-template-columns: 104px minmax(0,1fr); gap: 16px; padding: 18px 0; border-top: 1px solid var(--line); }
+.archive-entry time { color: var(--muted); font-size: 13px; }
+.archive-entry span { overflow-wrap: anywhere; }
+.taxonomy-entry { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-top: 1px solid var(--line); }
+.empty-state { color: var(--soft-ink); }
+:focus-visible { outline: 2px solid var(--sakura); outline-offset: 4px; }
+.skip-link { position: fixed; top: -100px; left: 12px; z-index: 100; padding: 8px 14px; background: white; }
+.skip-link:focus { top: 8px; }
+@media (max-width: 980px) {
+  .board > aside:first-child { order: 2; }
+  .board > .center-stack { order: 1; }
+  .board > aside:last-child { order: 3; }
+}
+@media (max-width: 560px) {
+  .section-heading, .post-heading { font-size: 26px; }
+  .post-header, .archive-list { padding: 20px 16px; }
+  .post-content { padding: 0 16px 24px; font-size: 16px; }
+  .post-content h2 { font-size: 23px; }
+  .post-content h3 { font-size: 20px; }
+  .post-cover { aspect-ratio: 4 / 3; }
+  .archive-entry { grid-template-columns: 1fr; gap: 4px; }
+  .pagination { font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .site-header, .search-results { transition: none; }
+}
