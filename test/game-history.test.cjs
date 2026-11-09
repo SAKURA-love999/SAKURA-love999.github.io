@@ -31,14 +31,29 @@ test('rounds persist by completion time, including zero scores, without ranking'
   assert.equal(store.persistent, true);
 });
 
-test('only the newest 100 rounds are retained, not the highest scores', () => {
+test('only the newest 10 rounds are retained, not the highest scores', () => {
   const store = createStore(memoryStorage(), options());
-  for (let i = 0; i < 105; i++) store.add(105 - i);
-  assert.equal(store.rounds.length, 100);
+  for (let i = 0; i < 15; i++) store.add(15 - i);
+  assert.equal(store.rounds.length, 10);
   assert.equal(store.rounds[0].score, 1);
-  assert.equal(store.rounds.at(-1).score, 100);
+  assert.equal(store.rounds.at(-1).score, 10);
   assert.throws(() => store.add(-1), RangeError);
   assert.throws(() => store.add(1.5), RangeError);
+});
+
+test('existing longer histories show the latest 10 and persist the new limit on the next round', () => {
+  const storage = memoryStorage();
+  const rounds = Array.from({ length: 100 }, (_, i) => ({
+    id: 'old-' + i, score: i, playedAt: new Date(Date.UTC(2026, 10, 10, 0, 0, i)).toISOString()
+  }));
+  storage.setItem(KEY, JSON.stringify({ version: 1, rounds }));
+  const store = createStore(storage, { id: () => 'new', now: () => '2026-11-10T01:00:00.000Z' });
+  assert.deepEqual(store.rounds.map(round => round.score), [99, 98, 97, 96, 95, 94, 93, 92, 91, 90]);
+  store.add(0);
+  const saved = JSON.parse(storage.getItem(KEY)).rounds;
+  assert.equal(saved.length, 10);
+  assert.equal(saved[0].score, 0);
+  assert.equal(saved.at(-1).score, 91);
 });
 
 test('bad storage data cannot crash the game or inject invalid records', () => {
