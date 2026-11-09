@@ -5,6 +5,52 @@ const gameCanvas = document.querySelector("#fleepy-game");
     const gameButton = document.querySelector("#fleepy-start");
     if (!gameCanvas) return;
     const gameContext = gameCanvas.getContext("2d");
+    const historyList = document.querySelector("#game-history-list");
+    const historyMore = document.querySelector("#game-history-more");
+    let storage;
+    try { storage = window.localStorage; } catch {}
+    const history = window.SakuraGameHistory.createStore(storage);
+    let visibleRounds = 5;
+
+    function renderHistory() {
+      const chinese = document.documentElement.lang === "zh-CN";
+      const rounds = history.rounds;
+      const format = new Intl.DateTimeFormat(chinese ? "zh-CN" : "ja-JP", {
+        year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false
+      });
+      historyList.replaceChildren();
+      rounds.slice(0, visibleRounds).forEach((round) => {
+        const item = document.createElement("li");
+        const time = document.createElement("time");
+        time.dateTime = round.playedAt;
+        time.textContent = format.format(new Date(round.playedAt));
+        const score = document.createElement("span");
+        score.className = "game-history__score";
+        const value = document.createElement("strong");
+        value.textContent = String(round.score);
+        const unit = document.createElement("span");
+        unit.textContent = chinese ? "分" : "点";
+        score.append(value, unit);
+        item.append(time, score);
+        historyList.append(item);
+      });
+      document.querySelector("#game-history-count").textContent = String(rounds.length);
+      document.querySelector("#game-history-empty").hidden = rounds.length > 0;
+      document.querySelector("#game-history-warning").hidden = history.persistent;
+      historyMore.hidden = visibleRounds >= rounds.length;
+    }
+
+    historyMore.addEventListener("click", () => {
+      visibleRounds += 5;
+      renderHistory();
+    });
+    document.addEventListener("sakura:languagechange", renderHistory);
+    window.addEventListener("storage", (event) => {
+      if (event.key === window.SakuraGameHistory.KEY || event.key === null) {
+        history.reload();
+        renderHistory();
+      }
+    });
     const game = {
       running: false,
       over: false,
@@ -90,10 +136,14 @@ const gameCanvas = document.querySelector("#fleepy-game");
     }
 
     function endGame() {
+      if (game.over) return;
       game.running = false;
       game.over = true;
       gameStateText.textContent = "GAME OVER";
       gameButton.textContent = "RETRY";
+      history.add(game.score);
+      visibleRounds = 5;
+      renderHistory();
       drawGame();
     }
 
@@ -165,6 +215,7 @@ const gameCanvas = document.querySelector("#fleepy-game");
       }
     });
     resetGame();
+    renderHistory();
 
 
 })();

@@ -1,0 +1,21 @@
+.game-history { border-top: 1px solid var(--line); padding: 16px; }
+.game-history__head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.game-history__head h3 { margin: 0; font-size: 17px; font-weight: 700; line-height: 1.6; }
+.game-history__count { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+.game-history__local { margin-left: auto; color: var(--moss); font-size: 11px; }
+.game-history__scroll { max-height: 270px; overflow-y: auto; scrollbar-gutter: stable; }
+.game-history__list { list-style: none; margin: 0; padding: 0; }
+.game-history__list li { display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 48px; padding: 10px 2px; border-top: 1px solid var(--line); }
+.game-history__list time { color: var(--soft-ink); font-size: 13px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.game-history__score { display: inline-flex; flex: 0 0 auto; justify-content: end; align-items: baseline; gap: 6px; min-width: 48px; }
+.game-history__score strong { font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.game-history__score > span { color: var(--muted); font-size: 12px; }
+.game-history__empty { margin: 18px 0 8px; color: var(--muted); font-size: 14px; }
+.game-history__warning { margin: 0 0 12px; color: #a04749; font-size: 13px; }
+.game-history__more { display: block; width: 100%; margin-top: 12px; padding: 8px; border: 1px solid var(--line); border-radius: 2px; color: var(--soft-ink); background: transparent; cursor: pointer; font-size: 14px; }
+.game-history__more:hover { color: var(--ink); background: rgba(82,107,90,.06); }
+.game-history [hidden] { display: none; }
+@media (max-width: 560px) {
+  .game-history { padding: 14px; }
+  .game-history__list time { font-size: 12px; }
+}
