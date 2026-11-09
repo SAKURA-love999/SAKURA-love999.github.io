@@ -1,7 +1,7 @@
 (function () {
   'use strict';
   const KEY = 'sakura-fleepy-history-v1';
-  const LIMIT = 100;
+  const LIMIT = 10;
 
   function validScore(score) {
     return Number.isSafeInteger(score) && score >= 0 && score <= 1000000;
