@@ -51,19 +51,32 @@ const gameCanvas = document.querySelector("#fleepy-game");
         renderHistory();
       }
     });
+    const settings = {
+      gravity: 0.12,
+      flapVelocity: -2.6,
+      maxFallSpeed: 2.4,
+      scrollSpeed: 1.6,
+      pipeGap: 148,
+      pipeWidth: 58,
+      pipeSpacing: 340,
+      groundHeight: 28
+    };
+    const startingY = (gameCanvas.height - settings.groundHeight) / 2;
     const game = {
       running: false,
       over: false,
       score: 0,
       lastFrame: 0,
-      player: { x: 136, y: 134, velocity: 0, radius: 15 },
+      player: { x: 136, y: startingY, velocity: 0, radius: 15 },
       pipes: []
     };
 
     function newPipe(x) {
+      const margin = 24;
+      const travel = Math.max(0, gameCanvas.height - settings.groundHeight - settings.pipeGap - margin * 2);
       return {
         x,
-        gapY: 62 + Math.random() * 92,
+        gapY: margin + Math.random() * travel,
         passed: false
       };
     }
@@ -72,9 +85,9 @@ const gameCanvas = document.querySelector("#fleepy-game");
       game.running = false;
       game.over = false;
       game.score = 0;
-      game.player.y = 134;
+      game.player.y = startingY;
       game.player.velocity = 0;
-      game.pipes = [newPipe(760)];
+      game.pipes = [newPipe(gameCanvas.width + 40)];
       gameScore.textContent = "0";
       gameStateText.textContent = "READY";
       gameButton.textContent = "START";
@@ -84,7 +97,7 @@ const gameCanvas = document.querySelector("#fleepy-game");
     function drawGame() {
       const width = gameCanvas.width;
       const height = gameCanvas.height;
-      const groundY = height - 28;
+      const groundY = height - settings.groundHeight;
 
       gameContext.clearRect(0, 0, width, height);
       gameContext.fillStyle = "#dcecf2";
@@ -99,8 +112,8 @@ const gameCanvas = document.querySelector("#fleepy-game");
 
       gameContext.fillStyle = "#526b5a";
       game.pipes.forEach((pipe) => {
-        const gap = 106;
-        const pipeWidth = 58;
+        const gap = settings.pipeGap;
+        const pipeWidth = settings.pipeWidth;
         gameContext.fillRect(pipe.x, 0, pipeWidth, pipe.gapY);
         gameContext.fillRect(pipe.x, pipe.gapY + gap, pipeWidth, groundY - pipe.gapY - gap);
         gameContext.fillStyle = "#3f5e50";
@@ -150,16 +163,20 @@ const gameCanvas = document.querySelector("#fleepy-game");
     function updateGame(delta) {
       const width = gameCanvas.width;
       const height = gameCanvas.height;
-      const groundY = height - 28;
+      const groundY = height - settings.groundHeight;
       const bird = game.player;
-      const pipeWidth = 58;
-      const gap = 106;
+      const pipeWidth = settings.pipeWidth;
+      const gap = settings.pipeGap;
 
-      bird.velocity += 0.36 * delta;
+      bird.velocity = Math.min(settings.maxFallSpeed, bird.velocity + settings.gravity * delta);
       bird.y += bird.velocity * delta;
+      if (bird.y < bird.radius) {
+        bird.y = bird.radius;
+        bird.velocity = Math.max(0, bird.velocity);
+      }
 
       game.pipes.forEach((pipe) => {
-        pipe.x -= 2.25 * delta;
+        pipe.x -= settings.scrollSpeed * delta;
         if (!pipe.passed && pipe.x + pipeWidth < bird.x) {
           pipe.passed = true;
           game.score += 1;
@@ -167,8 +184,9 @@ const gameCanvas = document.querySelector("#fleepy-game");
         }
       });
 
-      if (game.pipes[game.pipes.length - 1].x < width - 230) {
-        game.pipes.push(newPipe(width + 40));
+      const lastPipe = game.pipes[game.pipes.length - 1];
+      if (lastPipe.x < width + 40 - settings.pipeSpacing) {
+        game.pipes.push(newPipe(lastPipe.x + settings.pipeSpacing));
       }
       if (game.pipes[0].x < -90) {
         game.pipes.shift();
@@ -180,7 +198,7 @@ const gameCanvas = document.querySelector("#fleepy-game");
         (bird.y - bird.radius < pipe.gapY || bird.y + bird.radius > pipe.gapY + gap)
       ));
 
-      if (bird.y - bird.radius < 0 || bird.y + bird.radius > groundY || hitPipe) {
+      if (bird.y + bird.radius > groundY || hitPipe) {
         endGame();
       }
     }
@@ -203,7 +221,7 @@ const gameCanvas = document.querySelector("#fleepy-game");
         game.lastFrame = performance.now();
         requestAnimationFrame(tickGame);
       }
-      game.player.velocity = -6.6;
+      game.player.velocity = settings.flapVelocity;
     }
 
     gameButton.addEventListener("click", flapGame);

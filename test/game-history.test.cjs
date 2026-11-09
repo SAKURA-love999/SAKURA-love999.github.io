@@ -2,10 +2,8 @@
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const fs = require('node:fs');
-const path = require('node:path');
-const vm = require('node:vm');
 const { createStore, KEY } = require('../themes/sakura/source/js/game-history.js');
+const { createGameHarness } = require('./helpers/game.cjs');
 
 function memoryStorage() {
   const data = new Map();
@@ -101,31 +99,13 @@ test('another page in the same browser is read before adding a round', () => {
 });
 
 test('the actual game loop records once at game over, not on reset or translation', () => {
-  class Element {
-    constructor() { this.handlers = {}; this.children = []; this.hidden = false; this.dataset = {}; }
-    addEventListener(name, handler) { this.handlers[name] = handler; }
-    append(...children) { this.children.push(...children); }
-    replaceChildren(...children) { this.children = children; }
-    setAttribute() {}
-    focus() {}
-  }
-  const elements = new Map();
-  for (const id of ['fleepy-game', 'fleepy-score', 'fleepy-state', 'fleepy-start', 'game-history-list', 'game-history-count', 'game-history-empty', 'game-history-more', 'game-history-warning']) elements.set('#' + id, new Element());
-  const canvas = elements.get('#fleepy-game');
-  canvas.width = 720;
-  canvas.height = 270;
-  canvas.getContext = () => new Proxy({}, { get: () => () => {} });
-  const document = { querySelector: selector => elements.get(selector), createElement: () => new Element(), documentElement: { lang: 'ja' }, addEventListener: (name, handler) => { document[name] = handler; } };
-  const storage = memoryStorage();
-  const window = { localStorage: storage, SakuraGameHistory: { createStore, KEY }, addEventListener() {} };
-  const frames = [];
-  vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../themes/sakura/source/js/game.js'), 'utf8'), { document, window, performance: { now: () => 0 }, requestAnimationFrame: callback => frames.push(callback), Intl, Date, Math });
+  const harness = createGameHarness();
+  const { elements, storage, document } = harness;
   assert.equal(storage.getItem(KEY), null, 'READY does not create a round');
   function playUntilGameOver() {
-    elements.get('#fleepy-start').handlers.click();
-    let frame = 0;
-    while (frames.length && frame < 200) frames.shift()(++frame * 16.67);
-    assert.equal(elements.get('#fleepy-state').textContent, 'GAME OVER');
+    harness.tap();
+    harness.step(200);
+    assert.equal(harness.state, 'GAME OVER');
   }
   playUntilGameOver();
   assert.equal(JSON.parse(storage.getItem(KEY)).rounds.length, 1);
@@ -141,4 +121,67 @@ test('the actual game loop records once at game over, not on reset or translatio
   assert.equal(elements.get('#game-history-list').children.length, 6);
   assert.equal(elements.get('#game-history-more').hidden, true);
   assert.equal(JSON.parse(storage.getItem(KEY)).rounds.length, 6, 'Expanding history cannot create rounds');
+});
+
+test('a single flap has a small, consistent rise at common frame rates', () => {
+  for (const rate of [30, 60, 120]) {
+    const harness = createGameHarness();
+    const start = harness.bird.y;
+    let highest = start;
+    harness.tap();
+    for (let frame = 0; frame < rate * 0.6; frame++) {
+      harness.step(1, 1000 / rate);
+      highest = Math.min(highest, harness.bird.y);
+    }
+    assert.ok(start - highest >= 20 && start - highest <= 32, 'Gentle rise at ' + rate + 'fps: ' + (start - highest));
+    assert.equal(harness.state, 'PLAY');
+  }
+});
+
+test('obstacles move more slowly and their visible opening matches the wider gap', () => {
+  const harness = createGameHarness();
+  const initial = harness.rectangles.filter(rectangle => rectangle.width === 58);
+  assert.equal(initial[1].y - initial[0].height, 148);
+  assert.ok(initial[1].y + initial[1].height <= 242);
+  harness.tap();
+  harness.step(60);
+  const moved = harness.rectangles.find(rectangle => rectangle.width === 58);
+  assert.ok(Math.abs(initial[0].x - moved.x - 96) < 1);
+  assert.equal(harness.state, 'PLAY');
+});
+
+test('rapid taps reach a soft ceiling instead of immediately ending the round', () => {
+  const harness = createGameHarness();
+  for (let frame = 0; frame < 120; frame++) {
+    harness.tap();
+    harness.step();
+    assert.equal(harness.state, 'PLAY');
+    assert.ok(harness.bird.y >= 15);
+  }
+  assert.equal(harness.storage.getItem(KEY), null, 'Ceiling contact is not a game over');
+});
+
+test('obstacle collisions still end the round and save one history entry', () => {
+  const harness = createGameHarness();
+  for (let frame = 0; frame < 600; frame++) {
+    harness.tap();
+    harness.step();
+    if (harness.state === 'GAME OVER') break;
+  }
+  assert.equal(harness.state, 'GAME OVER');
+  assert.equal(harness.score, 0);
+  assert.equal(JSON.parse(harness.storage.getItem(KEY)).rounds.length, 1);
+});
+
+test('a relaxed tap cadence can pass multiple obstacles', () => {
+  const harness = createGameHarness();
+  for (let frame = 0; frame < 1200; frame++) {
+    if (frame % 43 === 0) harness.tap();
+    harness.step();
+    assert.equal(harness.state, 'PLAY', 'Still playing at frame ' + frame);
+  }
+  assert.ok(harness.score >= 3);
+  const pipes = harness.rectangles.filter(rectangle => rectangle.width === 58 && rectangle.y === 0);
+  assert.ok(pipes.length >= 2);
+  assert.ok(pipes[1].x - pipes[0].x >= 339);
 });
