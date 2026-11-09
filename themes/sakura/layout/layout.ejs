@@ -10,6 +10,7 @@
   <link rel="preload" href="<%- url_for('/fonts/kaisei-opti-regular.woff2') %>" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="<%- url_for('/css/site.css') %>">
   <link rel="stylesheet" href="<%- url_for('/css/content.css') %>">
+  <% if (page.__index && !page.next) { %><link rel="stylesheet" href="<%- url_for('/css/game-history.css') %>"><% } %>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -31,6 +32,9 @@
   </footer>
   <script id="site-data" type="application/json"><%- sakura_json(sakura_posts().map(post => ({ title: post.title, path: url_for(post.path), cover: sakura_cover(post) }))) %></script>
   <script src="<%- url_for('/js/site.js') %>" defer></script>
-  <% if (page.__index && !page.next) { %><script src="<%- url_for('/js/game.js') %>" defer></script><% } %>
+  <% if (page.__index && !page.next) { %>
+    <script src="<%- url_for('/js/game-history.js') %>" defer></script>
+    <script src="<%- url_for('/js/game.js') %>" defer></script>
+  <% } %>
 </body>
 </html>

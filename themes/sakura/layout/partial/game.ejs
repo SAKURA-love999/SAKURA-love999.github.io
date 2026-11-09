@@ -8,4 +8,17 @@
             <span class="mini-game__state" id="fleepy-state">READY</span>
             <button class="mini-game__button" type="button" id="fleepy-start">START</button>
           </div>
+          <section class="game-history" aria-labelledby="game-history-title">
+            <header class="game-history__head">
+              <h3 id="game-history-title" data-ja="履歴" data-zh="游玩记录">履歴</h3>
+              <span class="game-history__count" id="game-history-count">0</span>
+              <span class="game-history__local">LOCAL</span>
+            </header>
+            <p class="game-history__warning" id="game-history-warning" data-ja="保存できません。記録はこのページを開いている間のみ有効です。" data-zh="浏览器未允许保存，记录仅在当前页面打开期间有效。" role="status" hidden>保存できません。記録はこのページを開いている間のみ有効です。</p>
+            <div class="game-history__scroll">
+              <ol class="game-history__list" id="game-history-list"></ol>
+              <p class="game-history__empty" id="game-history-empty" data-ja="まだ記録はありません。" data-zh="暂无游玩记录。">まだ記録はありません。</p>
+            </div>
+            <button class="game-history__more" id="game-history-more" type="button" data-ja="もっと見る" data-zh="查看更多" hidden>もっと見る</button>
+          </section>
         </section>

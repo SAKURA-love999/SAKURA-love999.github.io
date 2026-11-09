@@ -52,10 +52,16 @@ test('home preserves cover-only cards, unlinked Hello World, and localized game'
   assert.equal($('.mini-game__title').attr('data-ja'), '遊んでみてね');
   assert.equal($('.mini-game__title').attr('data-zh'), '一起来玩吧！');
   assert.equal($('#fleepy-game').attr('tabindex'), '0');
+  assert.equal($('#game-history-title').attr('data-ja'), '履歴');
+  assert.equal($('#game-history-title').attr('data-zh'), '游玩记录');
+  assert.equal($('#game-history-list').children().length, 0, 'Private records are never baked into the website');
+  assert.equal($('#game-history-more').is('[hidden]'), true);
+  assert.ok($('script[src="/js/game-history.js"]').index() < $('script[src="/js/game.js"]').index());
   assert.equal(page('log/index.html')('.hero').length, 0);
   const post = page('2025/11/04/hello-world/index.html');
   assert.equal(post('.post-heading').text(), 'Hello World');
   assert.equal(post('.post-content h2').text(), 'Quick Start');
+  assert.equal(post('.post-content > p').first().text(), 'テスト');
   assert.equal(post('.post-date time').attr('datetime'), '2025-11-04');
   assert.equal(post('.mini-game').length, 0);
 });

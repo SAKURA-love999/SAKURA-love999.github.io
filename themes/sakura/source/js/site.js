@@ -50,6 +50,7 @@
     });
     try { localStorage.setItem('sakura-language', language); } catch {}
     if (results.classList.contains('is-open')) renderSearch();
+    document.dispatchEvent(new CustomEvent('sakura:languagechange'));
   }
 
   let saved;

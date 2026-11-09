@@ -9,7 +9,7 @@
     "server": "hexo server --ip 127.0.0.1 --port 4173",
     "clean": "hexo clean",
     "build": "hexo generate",
-    "check": "npm run build && node --test --test-concurrency=1 test/site.test.cjs",
+    "check": "npm run build && node --test --test-concurrency=1 test/game-history.test.cjs test/site.test.cjs",
     "test": "npm run check && node --test test/deploy.test.cjs",
     "deploy": "npm run check && hexo deploy"
   },
