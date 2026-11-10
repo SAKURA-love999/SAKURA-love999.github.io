@@ -52,9 +52,9 @@ const gameCanvas = document.querySelector("#fleepy-game");
       }
     });
     const settings = {
-      gravity: 0.12,
-      flapVelocity: -2.6,
-      maxFallSpeed: 2.4,
+      gravity: 0.22,
+      flapVelocity: -4.3,
+      maxFallSpeed: 4.2,
       scrollSpeed: 1.6,
       pipeGap: 106,
       pipeWidth: 58,
