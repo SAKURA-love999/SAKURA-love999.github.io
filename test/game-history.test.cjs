@@ -138,10 +138,10 @@ test('a single flap has a small, consistent rise at common frame rates', () => {
   }
 });
 
-test('obstacles move more slowly and their visible opening matches the wider gap', () => {
+test('obstacles keep their slower movement with the original opening size', () => {
   const harness = createGameHarness();
   const initial = harness.rectangles.filter(rectangle => rectangle.width === 58);
-  assert.equal(initial[1].y - initial[0].height, 148);
+  assert.equal(initial[1].y - initial[0].height, 106);
   assert.ok(initial[1].y + initial[1].height <= 242);
   harness.tap();
   harness.step(60);
@@ -173,15 +173,16 @@ test('obstacle collisions still end the round and save one history entry', () =>
   assert.equal(JSON.parse(harness.storage.getItem(KEY)).rounds.length, 1);
 });
 
-test('a relaxed tap cadence can pass multiple obstacles', () => {
+test('gentle taps can pass multiple obstacles at their original spacing', () => {
   const harness = createGameHarness();
+  const targetY = harness.bird.y;
   for (let frame = 0; frame < 1200; frame++) {
-    if (frame % 43 === 0) harness.tap();
+    if (frame === 0 || harness.bird.y >= targetY) harness.tap();
     harness.step();
     assert.equal(harness.state, 'PLAY', 'Still playing at frame ' + frame);
   }
   assert.ok(harness.score >= 3);
   const pipes = harness.rectangles.filter(rectangle => rectangle.width === 58 && rectangle.y === 0);
   assert.ok(pipes.length >= 2);
-  assert.ok(pipes[1].x - pipes[0].x >= 339);
+  assert.ok(Math.abs(pipes[1].x - pipes[0].x - 270) < 1);
 });

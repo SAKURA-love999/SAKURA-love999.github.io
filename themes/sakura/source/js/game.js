@@ -56,9 +56,9 @@ const gameCanvas = document.querySelector("#fleepy-game");
       flapVelocity: -2.6,
       maxFallSpeed: 2.4,
       scrollSpeed: 1.6,
-      pipeGap: 148,
+      pipeGap: 106,
       pipeWidth: 58,
-      pipeSpacing: 340,
+      pipeSpacing: 270,
       groundHeight: 28
     };
     const startingY = (gameCanvas.height - settings.groundHeight) / 2;
