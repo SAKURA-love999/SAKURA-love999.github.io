@@ -123,7 +123,7 @@ test('the actual game loop records once at game over, not on reset or translatio
   assert.equal(JSON.parse(storage.getItem(KEY)).rounds.length, 6, 'Expanding history cannot create rounds');
 });
 
-test('a single flap has a small, consistent rise at common frame rates', () => {
+test('a single flap has a moderate, consistent rise at common frame rates', () => {
   for (const rate of [30, 60, 120]) {
     const harness = createGameHarness();
     const start = harness.bird.y;
@@ -133,9 +133,20 @@ test('a single flap has a small, consistent rise at common frame rates', () => {
       harness.step(1, 1000 / rate);
       highest = Math.min(highest, harness.bird.y);
     }
-    assert.ok(start - highest >= 20 && start - highest <= 32, 'Gentle rise at ' + rate + 'fps: ' + (start - highest));
+    assert.ok(start - highest >= 36 && start - highest <= 44, 'Moderate rise at ' + rate + 'fps: ' + (start - highest));
     assert.equal(harness.state, 'PLAY');
   }
+});
+
+test('falling is faster than the easy version but remains capped', () => {
+  const harness = createGameHarness();
+  harness.tap();
+  harness.step(45);
+  const before = harness.bird.y;
+  harness.step();
+  const distance = harness.bird.y - before;
+  assert.ok(distance >= 4 && distance <= 4.4, 'Controlled falling speed: ' + distance);
+  assert.equal(harness.state, 'PLAY');
 });
 
 test('obstacles keep their slower movement with the original opening size', () => {
@@ -173,9 +184,9 @@ test('obstacle collisions still end the round and save one history entry', () =>
   assert.equal(JSON.parse(harness.storage.getItem(KEY)).rounds.length, 1);
 });
 
-test('gentle taps can pass multiple obstacles at their original spacing', () => {
+test('moderate taps can pass multiple obstacles at their original spacing', () => {
   const harness = createGameHarness();
-  const targetY = harness.bird.y;
+  const targetY = harness.bird.y + 18;
   for (let frame = 0; frame < 1200; frame++) {
     if (frame === 0 || harness.bird.y >= targetY) harness.tap();
     harness.step();
