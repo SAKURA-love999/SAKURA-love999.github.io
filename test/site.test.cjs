@@ -43,11 +43,12 @@ test('core routes render with the shared design and working assets', () => {
   assert.ok(fs.existsSync(path.join(output, '.nojekyll')));
 });
 
-test('home preserves cover-only cards, unlinked Hello World, and localized game', () => {
+test('home preserves cover-only cards, linked Hello World, and localized game', () => {
   const $ = page();
   assert.equal($('.hero').length, 1);
   assert.equal($('.article-title').text(), 'Hello World');
-  assert.equal($('.article-card .article-cover').is('a'), false);
+  assert.equal($('.article-card .article-cover').is('a'), true);
+  assert.equal($('.article-card .article-cover').attr('href'), '/2025/11/04/hello-world/');
   assert.equal($('.article-card p').length, 0);
   assert.equal($('.mini-game__title').attr('data-ja'), '遊んでみてね');
   assert.equal($('.mini-game__title').attr('data-zh'), '一起来玩吧！');
@@ -64,6 +65,18 @@ test('home preserves cover-only cards, unlinked Hello World, and localized game'
   assert.equal(post('.post-content > p').first().text(), 'テスト');
   assert.equal(post('.post-date time').attr('datetime'), '2025-11-04');
   assert.equal(post('.mini-game').length, 0);
+});
+
+test('home, diary and archive entries all open the article', () => {
+  const diary = page('log/index.html');
+  const articlePath = '/2025/11/04/hello-world/';
+  assert.equal(page()('.article-cover').attr('href'), articlePath);
+  assert.equal(diary('.article-card .article-cover').is('a'), true);
+  assert.equal(diary('.article-card .article-cover').attr('href'), articlePath);
+  assert.equal(diary('.article-card p').length, 0);
+  const archive = page('archives/index.html');
+  assert.equal(archive('.archive-entry').attr('href'), articlePath);
+  assert.equal(page(articlePath + 'index.html')('.post-content > p').first().text(), 'テスト');
 });
 
 test('new Markdown diaries populate lists, detail, taxonomy, archives and search; drafts stay private', () => {
@@ -95,6 +108,7 @@ test('new Markdown diaries populate lists, detail, taxonomy, archives and search
     assert.equal($('.mini-game').length, 0, 'Game appears only after the last diary');
     assert.equal(page('page/2/index.html')('.mini-game').length, 1);
     assert.equal(page('log/page/2/index.html')('.mini-game').length, 1);
+    assert.equal(page('log/page/2/index.html')('.article-cover').attr('href'), '/2025/11/04/hello-world/');
     const search = JSON.parse($('#site-data').text());
     assert.equal(search.length, 11);
     assert.ok(search.some(post => post.title === title));

@@ -55,7 +55,7 @@ tags:
 - 日文正文把 `lang` 改为 `ja`。语言按钮只切换页面界面，不会自动翻译日记正文。
 - `categories: []`、`tags: []` 表示暂不分类/打标签。
 - 首页和日记列表只展示封面、标题和日期，不展示正文摘要。
-- 新日记默认可点开。`Hello World` 的 `preview_link: false` 保留了首页不跳转的设置；其他日记不用加这项。
+- 首页和日记列表的封面、标题默认都能点击进入正文，`Hello World` 也一样；不需要手动添加文章链接。
 - 日期晚于当前时间的日记不会发布。
 
 ## 草稿
@@ -103,7 +103,9 @@ npm run deploy
 | 日记 Markdown | `source/_posts/` |
 | 草稿 | `source/_drafts/` |
 | 图片/字体/音乐 | `source/imgs/`、`source/fonts/`、`source/music/` |
-| 个人介绍/朋友/道具 | `source/about/`、`source/link/`、`source/tools/` |
+| 个人介绍 | `source/about/index.md` |
+| 朋友 | `source/link/index.md` |
+| 道具 | `source/tools/index.md` |
 | Hexo 配置 | `_config.yml` |
 | 首页、文章、列表模板 | `themes/sakura/layout/` |
 | 页面样式 | `themes/sakura/source/css/` |
@@ -112,5 +114,7 @@ npm run deploy
 | 生成的网页，不要直接编辑 | `public/` |
 
 `npm run check` 检查生成结果和写作流程；`npm test` 也会测试不覆盖历史的部署流程。`public/`、`node_modules/`、数据库和部署缓存不会提交到源码分支。
+
+修改个人介绍、朋友或道具时，保留文件顶部两条 `---` 之间的设置，把正文写在后面即可。`title_ja`、`title_zh` 是中日文标题；已有 `data-ja`、`data-zh` 的段落，需要分别修改这两个属性中的文字，语言切换才会生效。改完后按上面的“保存源码并发布”步骤更新正式网站。
 
 字体沿用本机保存的 Kaisei Opti（日文）和思源宋体（中文），许可证保留在 `source/fonts/`；现有图片、音乐的使用权仍由站主自行确认。
