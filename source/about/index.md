@@ -7,6 +7,6 @@ layout: page
 
 <p data-ja="さくら" data-zh="樱">さくら</p>
 
-地球終わった<br>不可抗力で
+世界最強なので<br>震えよ　人類！！！
 
 [GitHub](https://github.com/SAKURA-love999)
